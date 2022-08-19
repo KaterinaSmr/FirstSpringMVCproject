@@ -1,12 +1,14 @@
 package ru.springcourse.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import ru.springcourse.models.Book;
 import ru.springcourse.models.Person;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class BookDAO {
@@ -39,14 +41,18 @@ public class BookDAO {
     public void delete(int id) {
         jdbcTemplate.update("DELETE FROM book WHERE id=?", id);
     }
-    public Person getAssignedToPerson(int bookId){
-        int personId = show(bookId).getAssignedto();
-        if (personId != 0) {
-            Person person = personDAO.show(personId);
-            System.out.println("Book with id " + bookId + " is assigned to " + person.getId() + " " + person.getName());
-            return person;
-        }
-        return new Person();
+//    public Person getAssignedToPerson(int bookId){
+//        int personId = show(bookId).getAssignedto();
+//        if (personId != 0) {
+//            Person person = personDAO.show(personId);
+//            System.out.println("Book with id " + bookId + " is assigned to " + person.getId() + " " + person.getName());
+//            return person;
+//        }
+//        return new Person();
+//    }
+    public Person getAssignedToPerson(int id){
+        return jdbcTemplate.query("SELECT person.* FROM book JOIN person ON book.assignedto=person.id WHERE book.id=?",
+                new Object[]{id}, new BeanPropertyRowMapper<>(Person.class)).stream().findAny().orElse(new Person());
     }
 
     public List<Book> getBooksByPersonId(int personId){

@@ -35,7 +35,7 @@ public class PersonDAO {
         jdbcTemplate.update("DELETE FROM person WHERE id=?", id);
     }
 
-    public Optional<Person> show(String name) {
-        return jdbcTemplate.query("SELECT * FROM person WHERE name = ?", new BeanPropertyRowMapper<>(Person.class), name).stream().findAny();
+    public Person show(String name) {
+        return jdbcTemplate.query("SELECT * FROM person WHERE name = ?", new BeanPropertyRowMapper<>(Person.class), name).stream().findAny().orElse(null);
     }
 }
