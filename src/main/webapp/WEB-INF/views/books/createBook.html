@@ -7,20 +7,20 @@
 <body>
     <form th:method="POST" th:action="@{/books}" th:object="${book}">
         <div>
-            <label for="title">Enter book title</label>
+            <label for="title">Введите название книги</label>
             <input type="text" id="title" th:field="*{title}">
             <div th:if="${#fields.hasErrors('title')}" th:errors="*{title}" style="color:red">Title error</div>
             </br>
-            <label for="author">Enter author name</label>
+            <label for="author">Введите автора книги</label>
             <input type="text" id="author" th:field="*{author}">
             <div th:if="${#fields.hasErrors('author')}" th:errors="*{author}" style="color:red">Author error</div>
             </br>
-            <label for="year">Enter year of issue</label>
+            <label for="year">Введите год издания</label>
             <input type="text" id="year" th:field="*{year}">
             <div th:if="${#fields.hasErrors('year')}" th:errors="*{year}" style="color:red">Year error</div>
         </div>
         </br>
-        <input type="submit" value="Save">
+        <input type="submit" value="Сохранить">
     </form>
 </body>
 </html>

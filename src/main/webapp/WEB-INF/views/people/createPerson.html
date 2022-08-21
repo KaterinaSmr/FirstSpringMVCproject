@@ -7,15 +7,15 @@
 <body>
     <form th:method="POST" th:action="@{/people}" th:object="${person}">
         <div>
-            <label for="name">Enter name</label>
+            <label for="name">Введите имя</label>
             <input type="text" th:field="*{name}" id="name"/>
             <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" style="color: red">Name error</div>
             </br>
-            <label for="year">Enter year</label>
+            <label for="year">Введите год рождения</label>
             <input type="text" th:field="*{year}" id="year"/>
             <div th:if="${#fields.hasErrors('year')}" th:errors="*{year}" style="color: red">Year error</div>
             </br>
-            <input type="submit" value="Create">
+            <input type="submit" value="Сохранить">
         </div>
     </form>
 

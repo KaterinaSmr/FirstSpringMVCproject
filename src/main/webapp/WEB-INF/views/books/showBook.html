@@ -9,30 +9,30 @@
     <hr/>
 
     <div th:if="${book.getAssignedto() == 0}">
-        This book is available. Would you like to assign it?
+        Эта книга свободна. Хотите ее выдать?
         <form th:method="PATCH" th:action="@{/books/{id}/assign (id=${book.getId()})}" th:object="${person}">
-            <label for="person">Please select person</label>
+            <label for="person">Пожалуйста выберете человека</label>
             <select th:object="${person}" th:field="*{id}" id="person">
                 <option th:each="person:${people}" th:value="${person.getId()}" th:text="${person.getName()}">Name</option>
             </select>
-            <input type="submit" value="Assign to">
+            <input type="submit" value="Выдать книгу">
         </form>
 
     </div>
     <div th:if="${book.getAssignedto() != 0}">
-        <p th:text="'This book is assigned to ' + ${person.getName()}">assignee</p>
+        <p th:text="'Эта книга принадлежит  ' + ${person.getName()}">assignee</p>
         <form th:method="PATCH" th:action="@{/books/{id}/release (id=${book.getId()})}" th:object="${book}">
-            <input type="submit" value="Release book">
+            <input type="submit" value="Освободить книгу">
         </form>
     </div>
     <hr/>
 
 <form th:method="GET" th:action="@{/books/{id}/edit (id=${book.getId()})}" th:object="${book}">
-    <input type="submit" value="Edit">
+    <input type="submit" value="Редактировать">
 </form>
     </br>
 <form th:method="DELETE" th:action="@{/books/{id} (id=${book.getId()})}" th:object="${book}">
-    <input type="submit" value="Delete">
+    <input type="submit" value="Удалить">
 </form>
 
 </body>

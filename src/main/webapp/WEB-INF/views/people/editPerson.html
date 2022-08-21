@@ -7,15 +7,15 @@
 <body>
     <form th:method="PATCH" th:action="@{/people/{id}(id=${person.getId()})}" th:object="${person}">
         <div>
-            <label for="name">Enter name</label>
+            <label for="name">Имя</label>
             <input type="text" th:field="*{name}" id="name"/>
             <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" style="color: red">Name error</div>
             </br>
-            <label for="year">Enter year</label>
+            <label for="year">Год рождения</label>
             <input type="text" th:field="*{year}" id="year"/>
             <div th:if="${#fields.hasErrors('year')}" th:errors="*{year}" style="color: red">Year error</div>
             </br>
-            <input type="submit" value="Save">
+            <input type="submit" value="Сохранить">
         </div>
     </form>
 </body>
